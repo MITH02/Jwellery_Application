@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -24,9 +25,21 @@ public class Customer
     @Column(unique = true, nullable = false, length = 20)
     private String phone;
 
+    @Column(nullable = false)
     private String address;
 
     private String photoUrl;
+
+    @Column(nullable = false)
+    private String idType; // Aadhar, PAN, etc.
+
+    @Column(nullable = false)
+    private String idNumber;
+
+    private String idProofUrl; // Scanned copy of ID
+
+    @OneToMany(mappedBy = "customer")
+    private List<Pledge> pledges;
 
     @CreationTimestamp
     private LocalDateTime createdAt;

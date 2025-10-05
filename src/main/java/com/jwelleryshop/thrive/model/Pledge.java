@@ -16,12 +16,36 @@ public class Pledge
 	@JoinColumn(name = "customer_id", nullable = false)
 	private Customer customer;
 
-	private double amount;
+	@Column(nullable = false)
+	private String itemType; // necklace, ring, etc.
+
+	@Column(nullable = false)
+	private double goldWeight; // in grams
+
+	@Column(nullable = false)
+	private int goldPurity; // 22K, 24K etc.
+
+	@Column(nullable = false)
+	private double marketRate; // current gold rate at the time of pledge
+
+	@Column(nullable = false)
+	private double amount; // loan amount
+
+	@Column(nullable = false)
+	private double interestRate; // calculated based on amount
 
 	private String itemPhotoUrl;
 	private String receiptPhotoUrl;
 
-	private LocalDateTime createdAt;
+	@Column(nullable = false)
+	private LocalDateTime pledgeDate;
+
+	@Column(nullable = false)
+	private LocalDateTime returnDate;
+
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	private PledgeStatus status = PledgeStatus.ACTIVE;
 
 	public UUID getId()
 	{
